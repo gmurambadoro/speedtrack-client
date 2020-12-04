@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import speedtrack from "../../helpers/speedtrack";
+import {BrowserRouter} from "react-router-dom";
+import Layout from "../Layout/Layout";
 
 export default function App() {
     const [servers, setServers] = useState([]);
@@ -33,10 +35,12 @@ export default function App() {
     }, []);
 
     return (
-        <React.Fragment>
-            <h1>Servers ({servers.length})</h1>
-            <h1>Speeds ({speeds.length})</h1>
-            <h1>Service Providers ({serviceProviders.length})</h1>
-        </React.Fragment>
+        <BrowserRouter>
+            <Layout data={{
+                servers,
+                speeds,
+                serviceProviders,
+            }} />
+        </BrowserRouter>
     );
 }
