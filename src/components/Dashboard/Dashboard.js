@@ -39,7 +39,7 @@ export default function Dashboard({ data }) {
 
     const downloadStats = [
         {
-            title: 'Download',
+            title: 'Download Speed',
             description: (
                 <React.Fragment>
                     <i className={"fas fa-arrow-down"} />
@@ -49,7 +49,7 @@ export default function Dashboard({ data }) {
             ),
         },
         {
-            title: 'Upload',
+            title: 'Upload Speed',
             description: (
                 <React.Fragment>
                     <i className={"fas fa-arrow-up"} />
@@ -64,12 +64,12 @@ export default function Dashboard({ data }) {
                 <React.Fragment>
                     <i className={"fas fa-clock"} />
                     {' '}
-                    {bytes(averageDownload || 0)}/s
+                    {(averageLatency || 0).toFixed(1)} ms
                 </React.Fragment>
             ),
         },
         {
-            title: 'Data Used',
+            title: 'Sent / Received',
             description: (
                 <React.Fragment>
                     <i className={"fas fa-wifi"} />
