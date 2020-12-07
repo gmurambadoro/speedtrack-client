@@ -41,41 +41,41 @@ export default function Dashboard({ data }) {
         {
             title: 'Download',
             description: (
-                <>
+                <React.Fragment>
                     <i className={"fas fa-arrow-down"} />
                     {' '}
                     {bytes(averageDownload || 0)}/s
-                </>
+                </React.Fragment>
             ),
         },
         {
             title: 'Upload',
             description: (
-                <>
+                <React.Fragment>
                     <i className={"fas fa-arrow-up"} />
                     {' '}
                     {bytes(averageUpload || 0)}/s
-                </>
+                </React.Fragment>
             ),
         },
         {
             title: 'Latency',
             description: (
-                <>
+                <React.Fragment>
                     <i className={"fas fa-clock"} />
                     {' '}
                     {bytes(averageDownload || 0)}/s
-                </>
+                </React.Fragment>
             ),
         },
         {
             title: 'Data Used',
             description: (
-                <>
+                <React.Fragment>
                     <i className={"fas fa-wifi"} />
                     {' '}
                     {bytes(totalData || 0)}
-                </>
+                </React.Fragment>
             ),
         },
     ];
