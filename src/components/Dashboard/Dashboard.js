@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
-import Card from "react-bootstrap/Card";
 import bytes from "bytes";
 import SimpleCard from "../SimpleCard/SimpleCard";
 
-export default function Dashboard({ data }) {
+export default function Dashboard({ data, selectedIspIds }) {
     const {speeds} = data;
 
     const [speedData, setSpeedData] = useState([]);
@@ -17,19 +16,31 @@ export default function Dashboard({ data }) {
         setSpeedData(() => [...todaySpeeds]);
     }, [speeds]);
 
-    const averageDownload = speedData.map(x => parseFloat(x.download)).reduce((prev, cur) => {
-        return prev + cur;
-    }, 0) / speedData.length;
+    const filterByIsp = item => {
+        if (selectedIspIds === null) {
+            return item;
+        }
 
-    const averageUpload = speedData.map(x => parseFloat(x.upload)).reduce((prev, cur) => {
-        return prev + cur;
-    }, 0) / speedData.length;
+        return selectedIspIds
+            .map(x => String(x).trim().toLowerCase())
+            .includes(String(item.serviceProvider).toString().trim().toLowerCase());
+    };
 
-    const averageLatency = speedData.map(x => parseFloat(x.ping)).reduce((prev, cur) => {
-        return prev + cur;
-    }, 0) / speedData.length;
+    const filteredData = speedData.filter(filterByIsp);
 
-    const totalData = speedData.map(x => parseFloat(x.bytesSent) + parseFloat(x.bytesReceived)).reduce((prev, cur) => {
+    const averageDownload = filteredData.map(x => parseFloat(x.download)).reduce((prev, cur) => {
+        return prev + cur;
+    }, 0) / filteredData.length;
+
+    const averageUpload = filteredData.map(x => parseFloat(x.upload)).reduce((prev, cur) => {
+        return prev + cur;
+    }, 0) / filteredData.length;
+
+    const averageLatency = filteredData.map(x => parseFloat(x.ping)).reduce((prev, cur) => {
+        return prev + cur;
+    }, 0) / filteredData.length;
+
+    const totalData = filteredData.map(x => parseFloat(x.bytesSent) + parseFloat(x.bytesReceived)).reduce((prev, cur) => {
         return prev + cur;
     }, 0);
 

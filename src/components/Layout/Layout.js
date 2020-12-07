@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Form, FormControl} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {Route, Switch} from "react-router";
@@ -7,8 +7,8 @@ import Dashboard from "../Dashboard/Dashboard";
 import {Link} from "react-router-dom";
 import ServiceProviderFilter from "../ServiceProvider/ServiceProviderFilter";
 
-export default function Layout({ data, ...props }) {
-    const { filterIsp, serviceProviders, setFilterIsp } = data;
+export default function Layout({ data }) {
+    const { filterIsp, serviceProviders, setFilterIsp, selectedIspIds } = data;
 
     return (
         <React.Fragment>
@@ -33,7 +33,7 @@ export default function Layout({ data, ...props }) {
                 <Container sm={12}>
                     <Switch>
                         <Route path={"/"} exact>
-                            <Dashboard data={data} />
+                            <Dashboard selectedIspIds={selectedIspIds} data={data} />
                         </Route>
                     </Switch>
                 </Container>

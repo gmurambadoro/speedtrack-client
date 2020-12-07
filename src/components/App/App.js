@@ -35,6 +35,16 @@ export default function App() {
         return () => clearInterval(timer);
     }, []);
 
+    const selectedIspIds = () => {
+        if (filterIsp === 'ALL') {
+            return null;
+        }
+
+        return serviceProviders
+            .filter(x => String(x.isp).toUpperCase() === filterIsp.toUpperCase())
+            .map(y => `/internet-service-providers/${y.id}`);
+    };
+
     return (
         <BrowserRouter>
             <Layout data={{
@@ -43,6 +53,7 @@ export default function App() {
                 serviceProviders,
                 filterIsp,
                 setFilterIsp,
+                selectedIspIds: selectedIspIds(),
             }} />
         </BrowserRouter>
     );
