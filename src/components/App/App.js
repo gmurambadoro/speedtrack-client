@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import speedtrack from "../../helpers/speedtrack";
+import speedtrack from "../../services/speedtrack";
 import {BrowserRouter} from "react-router-dom";
 import Layout from "../Layout/Layout";
 
