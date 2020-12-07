@@ -14,7 +14,7 @@ export default function Dashboard({ data }) {
         const todaySpeeds = speeds.filter(x => x.timestamp.substr(0, 10) === today);
 
         setSpeedData(() => [...todaySpeeds]);
-    });
+    }, [speeds]);
 
     const averageDownload = speedData.map(x => parseFloat(x.download)).reduce((prev, cur) => {
         return prev + cur;
