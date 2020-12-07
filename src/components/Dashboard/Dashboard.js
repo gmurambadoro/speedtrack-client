@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import bytes from "bytes";
+import SimpleCard from "../SimpleCard/SimpleCard";
 
 export default function Dashboard({ data }) {
     const {speeds} = data;
@@ -36,36 +37,60 @@ export default function Dashboard({ data }) {
         boxShadow: '4px 4px lightgray',
     };
 
+    const downloadStats = [
+        {
+            title: 'Download',
+            description: (
+                <>
+                    <i className={"fas fa-arrow-down"} />
+                    {' '}
+                    {bytes(averageDownload || 0)}/s
+                </>
+            ),
+        },
+        {
+            title: 'Upload',
+            description: (
+                <>
+                    <i className={"fas fa-arrow-up"} />
+                    {' '}
+                    {bytes(averageUpload || 0)}/s
+                </>
+            ),
+        },
+        {
+            title: 'Latency',
+            description: (
+                <>
+                    <i className={"fas fa-clock"} />
+                    {' '}
+                    {bytes(averageDownload || 0)}/s
+                </>
+            ),
+        },
+        {
+            title: 'Data Used',
+            description: (
+                <>
+                    <i className={"fas fa-wifi"} />
+                    {' '}
+                    {bytes(totalData || 0)}
+                </>
+            ),
+        },
+    ];
+
     return (
         <React.Fragment>
             <Row>
-                <Col xs={12} sm={6} md={3}>
-                    <Card className={"m-2 text-center"} body style={styles}>
-                        <Card.Title>Download</Card.Title>
-                        <Card.Text><i className={"fas fa-arrow-down"} /> {bytes(averageDownload || 0)}ps</Card.Text>
-                    </Card>
-                </Col>
-
-                <Col xs={12} sm={6} md={3}>
-                    <Card className={"m-2 text-center"} body style={styles}>
-                        <Card.Title>Upload</Card.Title>
-                        <Card.Text><i className={"fas fa-arrow-up"} /> {bytes(averageUpload || 0)}ps</Card.Text>
-                    </Card>
-                </Col>
-
-                <Col xs={12} sm={6} md={3}>
-                    <Card className={"m-2 text-center"} body style={styles}>
-                        <Card.Title>Latency</Card.Title>
-                        <Card.Text><i className={"fas fa-clock"} /> {(averageLatency || 0).toFixed(1)} ms</Card.Text>
-                    </Card>
-                </Col>
-
-                <Col xs={12} sm={6} md={3}>
-                    <Card className={"m-2 text-center"} body style={styles}>
-                        <Card.Title>Data Used</Card.Title>
-                        <Card.Text><i className={"fas fa-wifi"} /> {bytes(totalData || 0)}</Card.Text>
-                    </Card>
-                </Col>
+                {downloadStats.map(x => (
+                    <Col xs={12} sm={6} md={3}>
+                        <SimpleCard key={x.title} item={{
+                            ...x,
+                            styles,
+                        }} />
+                    </Col>
+                ))}
             </Row>
         </React.Fragment>
     );
