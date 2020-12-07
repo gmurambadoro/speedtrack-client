@@ -7,6 +7,7 @@ export default function App() {
     const [servers, setServers] = useState([]);
     const [speeds, setSpeeds] = useState([]);
     const [serviceProviders, setServiceProviders] = useState([]);
+    const [filterIsp, setFilterIsp] = useState('ALL');
 
     useEffect(() => {
         const { getServers, getSpeeds, getServiceProviders } = speedtrack();
@@ -40,6 +41,8 @@ export default function App() {
                 servers,
                 speeds,
                 serviceProviders,
+                filterIsp,
+                setFilterIsp,
             }} />
         </BrowserRouter>
     );
