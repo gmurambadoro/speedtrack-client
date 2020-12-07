@@ -22,9 +22,7 @@ export default function Layout({ data }) {
                             {/*<Nav.Link as={Link} to={"/test"}>Link</Nav.Link>*/}
                         </Nav>
 
-                        <span className={'badge badge-danger ml-3 mr-3'}>{filterIsp === 'ALL' ? 'ALL ISP\'s' : filterIsp}</span>
-
-                        <ServiceProviderFilter serviceProviders={serviceProviders} setFilterIsp={setFilterIsp} />
+                        <ServiceProviderFilter serviceProviders={serviceProviders} setFilterIsp={setFilterIsp} filterIsp={filterIsp} />
                     </Navbar.Collapse>
                 </Navbar>
             </header>
