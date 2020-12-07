@@ -5,7 +5,7 @@ const speedtrack = function() {
         baseURL: 'http://speedtrack.localhost:8080',
     });
 
-    const fetchData = async (endpoint) => {
+    const getData = async (endpoint) => {
         const collection = [];
 
         let page = 1;
@@ -27,9 +27,9 @@ const speedtrack = function() {
 
     return {
         connector,
-        getServers: async () => fetchData('/servers.json'),
-        getSpeeds: async () => fetchData('/speeds.json'),
-        getServiceProviders: async () => fetchData('/internet-service-providers.json'),
+        getServers: async () => getData('/servers.json'),
+        getSpeeds: async () => getData('/speeds.json'),
+        getServiceProviders: async () => getData('/internet-service-providers.json'),
     };
 };
 

@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import bytes from "bytes";
 
 export default function Dashboard({ data }) {
-    const { servers, speeds, serviceProviders } = data;
+    const {speeds} = data;
 
     const [speedData, setSpeedData] = useState([]);
 
