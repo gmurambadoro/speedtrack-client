@@ -8,26 +8,23 @@ export default function Dashboard({ data, selectedIspIds }) {
 
     const [speedData, setSpeedData] = useState([]);
 
-    const [filteredData, setFilteredData] = useState([]);
-
     useEffect(() => {
         const today = (new Date()).toISOString().substr(0, 10);
 
         const todaySpeeds = speeds.filter(x => x.timestamp.substr(0, 10) === today);
 
         setSpeedData(() => [...todaySpeeds]);
+    }, [speeds]);
 
-        setFilteredData(speedData.filter(item => {
-            if (selectedIspIds === null) {
-                return item;
-            }
+    const filteredData = speedData.filter(item => {
+        if (selectedIspIds === null) {
+            return item;
+        }
 
-            return selectedIspIds
-                .map(x => String(x).trim().toLowerCase())
-                .includes(String(item.serviceProvider).toString().trim().toLowerCase());
-        }));
-
-    }, [speedData, speeds, selectedIspIds]);
+        return selectedIspIds
+            .map(x => String(x).trim().toLowerCase())
+            .includes(String(item.serviceProvider).toString().trim().toLowerCase());
+    });
 
     const averageDownload = filteredData.map(x => parseFloat(x.download)).reduce((prev, cur) => {
         return prev + cur;
@@ -96,8 +93,8 @@ export default function Dashboard({ data, selectedIspIds }) {
         <React.Fragment>
             <Row>
                 {downloadStats.map(x => (
-                    <Col xs={12} sm={6} md={3}>
-                        <SimpleCard key={x.title} item={{
+                    <Col key={x.title} xs={12} sm={6} md={3}>
+                        <SimpleCard item={{
                             ...x,
                             styles,
                         }} />
