@@ -8,25 +8,26 @@ export default function Dashboard({ data, selectedIspIds }) {
 
     const [speedData, setSpeedData] = useState([]);
 
+    const [filteredData, setFilteredData] = useState([]);
+
     useEffect(() => {
         const today = (new Date()).toISOString().substr(0, 10);
 
         const todaySpeeds = speeds.filter(x => x.timestamp.substr(0, 10) === today);
 
         setSpeedData(() => [...todaySpeeds]);
-    }, [speeds]);
 
-    const filterByIsp = item => {
-        if (selectedIspIds === null) {
-            return item;
-        }
+        setFilteredData(speedData.filter(item => {
+            if (selectedIspIds === null) {
+                return item;
+            }
 
-        return selectedIspIds
-            .map(x => String(x).trim().toLowerCase())
-            .includes(String(item.serviceProvider).toString().trim().toLowerCase());
-    };
+            return selectedIspIds
+                .map(x => String(x).trim().toLowerCase())
+                .includes(String(item.serviceProvider).toString().trim().toLowerCase());
+        }));
 
-    const filteredData = speedData.filter(filterByIsp);
+    }, [speedData, speeds, selectedIspIds]);
 
     const averageDownload = filteredData.map(x => parseFloat(x.download)).reduce((prev, cur) => {
         return prev + cur;
