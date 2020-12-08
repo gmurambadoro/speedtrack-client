@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import bytes from "bytes";
 import SimpleCard from "../SimpleCard/SimpleCard";
+import LineChart from "../Graph/LineChart";
 
 export default function Dashboard({ data, selectedIspIds }) {
     const {speeds} = data;
@@ -100,6 +101,12 @@ export default function Dashboard({ data, selectedIspIds }) {
                         }} />
                     </Col>
                 ))}
+            </Row>
+
+            <Row>
+                <Col>
+                    <LineChart data={filteredData} />
+                </Col>
             </Row>
         </React.Fragment>
     );
