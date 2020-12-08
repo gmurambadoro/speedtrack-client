@@ -5,10 +5,17 @@ import Nav from "react-bootstrap/Nav";
 import {Route, Switch} from "react-router";
 import Dashboard from "../Dashboard/Dashboard";
 import {Link} from "react-router-dom";
-import ServiceProviderFilter from "../ServiceProvider/ServiceProviderFilter";
+import ServiceProviderFilter from "../ServiceProviderFilter/ServiceProviderFilter";
+import OnlineStatus from "../OnlineStatus/OnlineStatus";
 
 export default function Layout({ data }) {
-    const { filterIsp, serviceProviders, setFilterIsp, selectedIspIds } = data;
+    const {
+        filterIsp,
+        serviceProviders,
+        setFilterIsp,
+        selectedIspIds,
+        lastActivityTime
+    } = data;
 
     return (
         <React.Fragment>
@@ -22,7 +29,15 @@ export default function Layout({ data }) {
                             {/*<Nav.Link as={Link} to={"/test"}>Link</Nav.Link>*/}
                         </Nav>
 
-                        <ServiceProviderFilter serviceProviders={serviceProviders} setFilterIsp={setFilterIsp} filterIsp={filterIsp} />
+                        <span className={"mr-2"}>
+                            <OnlineStatus lastActivityTime={lastActivityTime} />
+                        </span>
+
+                        <ServiceProviderFilter
+                            serviceProviders={serviceProviders}
+                            setFilterIsp={setFilterIsp}
+                            filterIsp={filterIsp}
+                        />
                     </Navbar.Collapse>
                 </Navbar>
             </header>

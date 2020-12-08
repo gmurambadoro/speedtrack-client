@@ -8,23 +8,28 @@ export default function App() {
     const [speeds, setSpeeds] = useState([]);
     const [serviceProviders, setServiceProviders] = useState([]);
     const [filterIsp, setFilterIsp] = useState('ALL');
+    const [lastActivityTime, setLastActivityTime] = useState(null)
 
     useEffect(() => {
         const { getServers, getSpeeds, getServiceProviders } = speedtrack();
 
         const refresh = () => {
-            console.log(`Refreshing data @ ${(new Date()).toUTCString()}`);
-
             getServers().then(data => {
                 setServers(() => [...data]);
+
+                setLastActivityTime(Date.now());
             }).catch(err => console.error(`ERROR!! Cannot getServers:: ${err}`));
 
             getSpeeds().then(data => {
                 setSpeeds(() => [...data]);
+
+                setLastActivityTime(Date.now());
             }).catch(err => console.error(`ERROR!! Cannot getSpeeds:: ${err}`));
 
             getServiceProviders().then(data => {
                 setServiceProviders(() => [...data]);
+
+                setLastActivityTime(Date.now());
             }).catch(err => console.error(`ERROR!! Cannot setServiceProviders:: ${err}`));
         };
 
@@ -53,6 +58,7 @@ export default function App() {
                 serviceProviders,
                 filterIsp,
                 setFilterIsp,
+                lastActivityTime,
                 selectedIspIds: selectedIspIds(),
             }} />
         </BrowserRouter>
