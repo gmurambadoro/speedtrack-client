@@ -1,6 +1,6 @@
 import React from "react";
 import green from "../../assets/images/green.ico";
-import red from "../../assets/images/red.jpg";
+import red from "../../assets/images/red.png";
 
 export default function OnlineStatus({ lastActivityTime = null }) {
     let isOnline = false;
@@ -8,7 +8,7 @@ export default function OnlineStatus({ lastActivityTime = null }) {
     if (lastActivityTime !== null) {
         const seconds = (Date.now() - lastActivityTime) / 1000;
 
-        isOnline = (seconds <= (60 * 5)); // server has a refresh interval of 5 minutes.
+        isOnline = (seconds <= (60 * 6)); // server has a refresh interval of 5 minutes + 1 minutes padding.
         // todo: Get this from server configuration
     }
 
@@ -17,7 +17,7 @@ export default function OnlineStatus({ lastActivityTime = null }) {
         height: 'auto',
     };
 
-    const hoverText = `Last Refreshed: ${new Date(lastActivityTime).toLocaleString()}`;
+    const hoverText = `${isOnline ? 'ONLINE' : 'OFFLINE'} : Last Refreshed: ${new Date(lastActivityTime).toLocaleString()}`;
 
     return (
         <span title={hoverText}>

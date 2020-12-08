@@ -23,7 +23,13 @@ export default function App() {
             getSpeeds().then(data => {
                 setSpeeds(() => [...data]);
 
-                setLastActivityTime(Date.now());
+                if (data) {
+                    const { timestamp } = data[0];
+
+                    setLastActivityTime(Date.parse(timestamp));
+                } else {
+                    setLastActivityTime(new Date(0));
+                }
             }).catch(err => console.error(`ERROR!! Cannot getSpeeds:: ${err}`));
 
             getServiceProviders().then(data => {
