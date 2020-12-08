@@ -17,7 +17,7 @@ export default function OnlineStatus({ lastActivityTime = null }) {
         height: 'auto',
     };
 
-    const hoverText = `${isOnline ? 'ONLINE' : 'OFFLINE'} : Last Refreshed: ${new Date(lastActivityTime).toLocaleString()}`;
+    const hoverText = `${isOnline ? 'ONLINE' : 'OFFLINE'} : Last Refreshed @ ${new Date(lastActivityTime).toLocaleString()}`;
 
     return (
         <span title={hoverText}>
